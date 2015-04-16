@@ -10,13 +10,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class RemoteControlFragment extends Fragment {
     private TextView mSelectedTextView;
     private TextView mWorkingTextView;
+    private Button mButton;
+    private Button mDeleteButton;
     private Button mZeroButton;
-    private Button mOneButton;
     private Button mEnterButton;
 
     @Override
@@ -57,26 +56,26 @@ public class RemoteControlFragment extends Fragment {
         for(int i=2; i<tableLayout.getChildCount() - 1; i++){
             TableRow tableRow = (TableRow)tableLayout.getChildAt(i);
             for(int j = 0 ; j < tableRow.getChildCount(); j++){
-                Button button = (Button)tableRow.getChildAt(j);
-                button.setText("" + number);
-                button.setOnClickListener(numberButtonListener);
+                mButton = (Button)tableRow.getChildAt(j);
+                mButton.setText("" + number);
+                mButton.setOnClickListener(numberButtonListener);
                 number++;
             }
         }
 
         TableRow bottomRow = (TableRow)tableLayout.getChildAt(tableLayout.getChildCount() - 1);
-        Button deleteButton = (Button)bottomRow.getChildAt(0);
-        deleteButton.setText("Delete");
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        mDeleteButton = (Button)bottomRow.getChildAt(0);
+        mDeleteButton.setText("Delete");
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mWorkingTextView.setText("0");
             }
         });
 
-        Button zeroButton = (Button)bottomRow.getChildAt(1);
-        zeroButton.setText("0");
-        zeroButton.setOnClickListener(numberButtonListener);
+        mZeroButton = (Button)bottomRow.getChildAt(1);
+        mZeroButton.setText("0");
+        mZeroButton.setOnClickListener(numberButtonListener);
 
         mEnterButton = (Button)bottomRow.getChildAt(2);
         mEnterButton.setText("Enter");
